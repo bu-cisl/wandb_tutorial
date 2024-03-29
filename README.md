@@ -1,7 +1,7 @@
 # Installing `wandb`
 This is a tutorial/template for BU researchers to integrate `wandb` in their ML stack with the [Boston University Shared Computing Cluster (SCC)](https://www.bu.edu/tech/support/research/computing-resources/scc/), the batch system of which is based on the [Sun Grid Engine](https://gridscheduler.sourceforge.net/) scheduler.
 
-Begin by installing `wandb` in your virtual environment with 
+Begin by installing `wandb` in your virtual environment on the SCC with 
 
 ```
 pip install wandb
@@ -12,6 +12,8 @@ Then login to your `wandb` account using
 wandb login
 ```
 which will prompt you for your API key. If you don't have an API key, you may log on [here](https://wandb.ai/authorize) to retrieve it. When you paste it in the terminal, it won't show anything -- that's ok, it's for security.
+
+You should be good to run this command just once during installation. Any other time you log on the SCC, you wouldn't need to log into `wandb` again because it created a `.netrc` file with your `wandb` login credentials in your home directory.
 
 # Basic `wandb`
 I provided a basic sample of how to use the basic features of `wandb`, which are `wandb.log` and `wandb.watch` in `basic_train.py`. You may define the project name and entity (entity is either the `wandb` team name which is `cisl-bu`, or your `wandb` username) in the config `dict`.
