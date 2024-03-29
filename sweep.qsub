@@ -4,18 +4,13 @@
 
 #$ -l h_rt=1:00:00
 
-timestamp=$(date +"%Y%m%d%H%M%S%N")  # %N for nanoseconds
-
-random_suffix=$(($RANDOM % 1000))  # Generates a random number between 0 and 999
-
-jobname="sweep_tutorial_${timestamp}_${random_suffix}"
-
 #$ -j y
-# define number of nodes/agents to use on the SCC
+# array jobs to define number of nodes/sweep agents to use on the SCC
 #$ -t 1-20
+
 
 module load python3/3.10.12
 source activate .venv/bin/activate
 # Assuming your Python script is in the current directory
 # Replace "your_sweep_id" with the actual sweep ID
-wandb agent --count 3 cisl-bu/sweep_tutorial/9qgozmer
+wandb agent --count 1 cisl-bu/sweep_tutorial2/rl89nffj

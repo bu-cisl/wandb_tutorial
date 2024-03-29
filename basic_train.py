@@ -6,8 +6,8 @@ import wandb
 
 # Configuration dictionary
 config = {
-    "project_name": "mnist_tutorial",
-    "entity": "cisl-bu",
+    "project_name": "wandb_mnist_tutorial",
+    "entity": "cisl-bu", #name of wandb team
     "batch_size": 64,
     "learning_rate": 0.001,
     "epochs": 5,

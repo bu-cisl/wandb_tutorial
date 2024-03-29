@@ -3,7 +3,6 @@ from torch import nn, optim
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 import wandb
-import argparse
 
 
 def main():
@@ -51,7 +50,7 @@ def main():
         wandb.watch(model, log="all")
 
         # Training loop
-        for epoch in range(100):
+        for epoch in range(10):
             model.train()
             for images, labels in trainloader:
                 optimizer.zero_grad()

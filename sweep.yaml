@@ -1,8 +1,8 @@
 program: sweep_train.py
-method: random  
+method: random # random, grid, bayes, hyperband 
 metric:
-  name: correct
-  goal: maximize
+  name: loss
+  goal: minimize
 parameters:
   learning_rate:
     min: 0.00001
