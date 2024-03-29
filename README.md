@@ -32,8 +32,24 @@ wandb sweep --project <project_name> --entity <entity_name> sweep.yaml
 ```
 which will print out the `sweep_id` you need to run the hyperparameter search. It looks like this:
 ![wandb sweep](assets/wandb_sweep.png)
-/wandb sweep.png "Title")
 
+You'll then take the given command, `wandb agent cisl-bu/sweep_example/lkjlh4uf`, and copy it into the last line of `sweep.qsub` but add the option `--count 1`, to make sure that that batch job runs only one run to ensure that all jobs can complete within the time limit defined by `h_rt`.
 
-`sweep.sh` is a wrapper for the qsub batch script that you will ultimately run.
+`sweep.sh` is a wrapper for the qsub batch script that you will ultimately run in the login node by entering in the terminal:
+```
+./sweep.sh
+```
+
+If this doesn't work, you'll have to change the access permissions with
+```
+chmod +x ./sweep.sh
+```
+and then run `./sweep.sh` again.
+
+You can monitor the array batch job with qstat -u <scc username> and if you want to watch the status,
+```
+watch -n 1 "qstat -u <scc username>"
+```
+
+Happy ML training!
 
