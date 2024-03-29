@@ -1,10 +1,10 @@
 # Installing `wandb`
 This is a tutorial/template for BU researchers to integrate `wandb` in their ML stack with the [Boston University Shared Computing Cluster (SCC)](https://www.bu.edu/tech/support/research/computing-resources/scc/), the batch system of which is based on the [Sun Grid Engine](https://gridscheduler.sourceforge.net/) scheduler.
 
-Begin by installing `wandb` in your virtual environment on the SCC with 
+Begin by installing `wandb` and other necessary packages in your virtual environment on the SCC with 
 
 ```
-pip install wandb
+pip install -r requirements.txt
 ```
 
 Then login to your `wandb` account using
