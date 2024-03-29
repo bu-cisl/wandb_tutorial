@@ -31,6 +31,8 @@ First, define your configuration parameters in `sweep.yaml`. You may then instan
 wandb sweep --project <project_name> --entity <entity_name> sweep.yaml
 ```
 which will print out the `sweep_id` you need to run the hyperparameter search. It looks like this:
+![wandb sweep](assets/wandb_sweep.png)
+/wandb sweep.png "Title")
 
 
 `sweep.sh` is a wrapper for the qsub batch script that you will ultimately run.
