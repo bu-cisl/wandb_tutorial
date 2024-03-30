@@ -87,4 +87,5 @@ qdel <JOBID>
 `wandb.sweep` is very flexible, you may search over more parameters than typical ML hyperparameters. Get creative! But also be wary that  larger number of parameters to search over will require more runs, which could take a while on the SCC since we have a limited number of GPUs (for now).
 
 Otherwise, happy ML training!
-
+## Contributions
+This repo is by no means a complete tutorial. What I have currently is just a fraction of wandb capabilities. If you're enjoying another wandb feature, I encourage you to make a PR for this repo with your own tutorial! And if there are any errors/mistakes, please let me know at jalido@bu.edu
