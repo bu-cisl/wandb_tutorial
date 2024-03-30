@@ -18,4 +18,4 @@ module load python3/3.10.12
 source activate .venv/bin/activate
 # Assuming your Python script is in the current directory
 # Replace "your_sweep_id" with the actual sweep ID
-wandb agent --count 3 cisl-bu/sweep_tutorial/9qgozmer
+wandb agent --count 1 cisl-bu/sweep_tutorial/9qgozmer
