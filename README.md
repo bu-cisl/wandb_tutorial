@@ -88,4 +88,4 @@ qdel <JOBID>
 
 Otherwise, happy ML training!
 ## Contributions
-This repo is by no means a complete tutorial. What I have currently is just a fraction of wandb capabilities. If you're enjoying another wandb feature, I encourage you to make a PR for this repo with your own tutorial! And if there are any errors/mistakes, please let me know at jalido@bu.edu
+This repo is by no means a complete tutorial. What I have currently is just a fraction of wandb capabilities. If you're enjoying another wandb feature, I encourage you to make a PR for this repo with your own tutorial! And if there are any errors/mistakes/questions/comments, please let me know at jalido@bu.edu :)
