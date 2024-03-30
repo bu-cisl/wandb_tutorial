@@ -73,7 +73,7 @@ wandb agent --count 1 cisl-bu/sweep_tutorial/lkjlh4uf
 ```
 We first define our SCC project, the job time limit, `N` SCC compute nodes to use (how many agents to run) from `1-N`. Then we just load the python module, activate the virtual environment and call the agent for that sweep_id! 
 
-If you need a GPU, you may request one (or several). An example is shown here that you can add to the qsub script before the linux commands:
+If you need a GPU, you may request one (or several). Typically, you just need one, unless you have it [in your code to explicitly use multiple](https://pytorch.org/tutorials/beginner/former_torchies/parallelism_tutorial.html). Otherwise, you're stalling and waiting longer in the queue. An example is shown here that you can add to the qsub script before the linux commands:
 ```
 #$ -l gpus=1
 #$ -l gpu_c=8.0
