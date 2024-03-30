@@ -42,7 +42,7 @@ qsub run.qsub
 ```
 otherwise you will be process-reaped by running it in the SCC login node.
 
-Modify the paths, and requested resources accordingly. `qsub` options for requesting resources and batch scripts examples may be found [here](https://www.bu.edu/tech/support/research/system-usage/running-jobs/submitting-jobs/).
+Modify the paths, and requested resources accordingly. `qsub` options for requesting resources and batch scripts examples may be found [here](https://www.bu.edu/tech/support/research/system-usage/running-jobs/submitting-jobs/). I write a bit more on qsub scripts in the following section. 
 
 ## Hyperparameter search: `wandb.sweep`
 I provided a simple template for running hyperparameter search on batch jobs on the SCC, the relevant files are `sweep.yaml`, `sweep.qsub`, `sweep.sh` and `sweep_train.py`. 
