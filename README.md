@@ -110,7 +110,7 @@ source activate .venv/bin/activate
 wandb agent --count 1 cisl-bu/sbr_diffusion/lkjlh4uf
 ```
 
-I wrote a shell script `sweep.sh` which is a wrapper for the qsub batch script that you will ultimately run in the login node by entering in the terminal:
+I wrote a shell script `sweep.sh` which is a wrapper for the qsub batch script, just for ease of logging output and errors. This is the file that you will ultimately run in the login node by entering in the terminal:
 ```
 ./sweep.sh
 ```
