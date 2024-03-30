@@ -1,5 +1,5 @@
 # `wandb` tutorial
-This is a tutorial/template for Boston University researchers who have SCC projects to integrate [`wandb`](https://wandb.ai/site) in their ML stack with the [Boston University Shared Computing Cluster (SCC)](https://www.bu.edu/tech/support/research/computing-resources/scc/), the batch system of which is based on the [Sun Grid Engine](https://gridscheduler.sourceforge.net/) scheduler. Therefore, this is more a tutorial/example for wandb + SCC integration, rather than a tutorial on `wandb` -- you can find the latter in abundance online.
+This is a tutorial/template for Boston University researchers who have SCC projects to integrate [`wandb`](https://wandb.ai/site) in their ML stack with the [Boston University Shared Computing Cluster (SCC)](https://www.bu.edu/tech/support/research/computing-resources/scc/), the batch system of which is based on the [Sun Grid Engine](https://gridscheduler.sourceforge.net/) (SGE) scheduler. Therefore, this is more a tutorial/example for wandb + SCC integration, rather than a tutorial on `wandb` -- you can find the latter in abundance online.
 
 ## Installing `wandb` and others
 First begin by creating a virtual environment for your project in your project folder. In the terminal on the SCC login node, navigate to the top level of your project folder and proceed with
@@ -56,11 +56,59 @@ which will print out the `sweep_id` you need to run the hyperparameter search. I
 
 You'll then take the given command, `wandb agent cisl-bu/sweep_example/lkjlh4uf` in this example, and copy it into the last line of `sweep.qsub` but add the option `--count 1`, to make sure that that batch job runs only one run to ensure that all jobs can complete within the time limit defined by `h_rt`.
 
-The wandb sweep controller runs until you stop it which you can do on the wandb.ai sweeps project webpage, or in the terminal with the command
+The `qsub` script looks like this
 ```
-wandb sweep --cancel cisl-bu/sweep_example/lkjlh4uf
+#!/bin/bash -l
+
+#$ -P tianlabdl
+
+#$ -l h_rt=1:00:00
+
+# array jobs to define number of nodes/sweep agents to use on the SCC
+#$ -t 1-20
+
+module load python3/3.10.12
+source activate .venv/bin/activate
+wandb agent --count 1 cisl-bu/sweep_tutorial/lkjlh4uf
 ```
-for example.
+We first define our SCC project, the job time limit, `N` SCC compute nodes to use (how many agents to run) from `1-N`. Then we just load the python module, activate the virtual environment and call the agent for that sweep_id! 
+
+If you need a GPU, you may request one (or several). An example is shown here that you can add to the qsub script before the linux commands:
+```
+#$ -l gpus=1
+#$ -l gpu_c=8.0
+#$ -l gpu_memory=48G
+```
+BU SCC SGE documentation for GPU computing is [here](https://www.bu.edu/tech/support/research/software-and-programming/programming/multiprocessor/gpu-computing/).
+
+You can also request a number of CPU cores with
+```
+#$ -pe omp 8
+#$ -l mem_per_core=8G
+```
+up to 32 cores, and from 3 to 28 gigabytes of memory per core.
+
+The example qsub script would then look like this:
+```
+#!/bin/bash -l
+
+# Set SCC project
+#$ -P tianlabdl
+
+#$ -l h_rt=12:00:00
+
+#$ -pe omp 8
+#$ -l mem_per_core=8G
+#$ -t 1-20
+
+#$ -l gpus=1
+#$ -l gpu_c=8.0
+#$ -l gpu_memory=48G
+
+module load python3/3.10.12
+source activate .venv/bin/activate
+wandb agent --count 1 cisl-bu/sbr_diffusion/lkjlh4uf
+```
 
 I wrote a shell script `sweep.sh` which is a wrapper for the qsub batch script that you will ultimately run in the login node by entering in the terminal:
 ```
@@ -73,10 +121,18 @@ chmod +x ./sweep.sh
 ```
 and then run `./sweep.sh` again.
 
-You can monitor the array batch job with qstat -u <scc username> and if you want to watch the status,
+You never need to track which hyperparameter combinations you're doing; the Sweep Controller on the wandb backend takes care of all that for you, that you can call the this qsub script several times without changing the files!
+
+You can monitor the array batch job with `qstat -u <scc username>` and if you want to watch the status,
 ```
 watch -n 1 "qstat -u <scc username>"
 ```
+
+The wandb sweep controller runs until you stop it which you can do on the wandb.ai sweeps project webpage, or in the terminal with the command
+```
+wandb sweep --cancel cisl-bu/sweep_example/lkjlh4uf
+```
+for example.
 
 If you decide to stop the runs, you may either cancel the sweep like above or with the batch system command 
 ```
