@@ -30,13 +30,17 @@ which will prompt you for your API key. If you don't have an API key, you may lo
 You should be good to run this command just once during installation. Any other time you log on the SCC, you wouldn't need to log into `wandb` again because it created a `.netrc` file with your `wandb` login credentials in your home directory.
 
 # Basic `wandb`
-I provided a basic sample of how to use the basic features of `wandb`, which are `wandb.log` and `wandb.watch` in `basic_train.py`. You may define the project name and entity (entity is either the `wandb` team name which is `cisl-bu`, or your `wandb` username) in the config `dict`.
+I provided a basic sample of how to use the basic features of `wandb`, which are `wandb.log` and `wandb.watch` in `basic_train.py`. This allows you to monitor training, and even visualize the tensors themselves as the evolve throughout training! It is all there in `basic_train.py`.
+
+You may define the project name and entity (entity is either the `wandb` team name which is `cisl-bu`, or your `wandb` username) in the config `dict` in `basic_train.py`
 Without the `entity` field, it will default to your wandb `username` and without the `project` field, it will default to "Uncategorized." 
 
 If you wish to run a more serious/heavy experiment on an SCC compute node `run.qsub` is the qsub file you may run with 
 ```
 qsub run.qsub
 ```
+otherwise you will be process-reaped by running it in the SCC login node.
+
 Modify the paths, and requested resources accordingly. `qsub` options for requesting resources and batch scripts examples may be found [here](https://www.bu.edu/tech/support/research/system-usage/running-jobs/submitting-jobs/).
 
 # Hyperparameter search: `wandb.sweep`
