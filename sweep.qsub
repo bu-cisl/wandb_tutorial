@@ -4,12 +4,6 @@
 
 #$ -l h_rt=1:00:00
 
-timestamp=$(date +"%Y%m%d%H%M%S%N")  # %N for nanoseconds
-
-random_suffix=$(($RANDOM % 1000))  # Generates a random number between 0 and 999
-
-jobname="sweep_tutorial_${timestamp}_${random_suffix}"
-
 #$ -j y
 # define number of nodes/agents to use on the SCC
 #$ -t 1-20
