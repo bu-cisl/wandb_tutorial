@@ -79,7 +79,7 @@ qdel <JOBID>
 ```
 
 
-`wandb.sweep` is very flexible, you may search over more parameters than typical ML hyperparameters. Get creative! But also be wary that the larger number of parameters to search over, will require more runs, which could take a while on the SCC while we have a limited number of GPUs.
+`wandb.sweep` is very flexible, you may search over more parameters than typical ML hyperparameters. Get creative! But also be wary that  larger number of parameters to search over will require more runs, which could take a while on the SCC since we have a limited number of GPUs (for now).
 
 Otherwise, happy ML training!
 
