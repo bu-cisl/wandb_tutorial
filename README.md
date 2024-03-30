@@ -47,7 +47,7 @@ Modify the paths, and requested resources accordingly. `qsub` options for reques
 ## Hyperparameter search: `wandb.sweep`
 I provided a simple template for running hyperparameter search on batch jobs on the SCC, the relevant files are `sweep.yaml`, `sweep.qsub`, `sweep.sh` and `sweep_train.py`. 
 
-First, define your configuration parameters in `sweep.yaml`. You may then instantiate a `sweep` in the CLI with
+First, define your configuration parameters in `sweep.yaml`. Information on the structure of the file can be found [here](https://docs.wandb.ai/guides/sweeps/define-sweep-configuration). You may then instantiate a `sweep` in the CLI with
 ```
 wandb sweep --project <project_name> --entity <entity_name> sweep.yaml
 ```
