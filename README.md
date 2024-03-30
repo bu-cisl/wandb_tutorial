@@ -1,7 +1,20 @@
-# Installing `wandb`
+# Installing `wandb` and others
 This is a tutorial/template for BU researchers to integrate `wandb` in their ML stack with the [Boston University Shared Computing Cluster (SCC)](https://www.bu.edu/tech/support/research/computing-resources/scc/), the batch system of which is based on the [Sun Grid Engine](https://gridscheduler.sourceforge.net/) scheduler.
+First begin by creating a virtual environment for your project in your project folder. In the terminal on the SCC login node, navigate to the top level of your project folder and proceed with
+```
+module load python3/3.10.12
+```
+which is the latest version of python available on the SCC (you can check with `module avail python`).
+After this, you can now create a python virtual environment with 
+```
+virtualenv .venv
+```
+This creates a virtual environment, the data and installations for which are stored in the folder `.venv`. To activate the environmnent,
+```
+source .venv/bin/activate
+```
 
-Begin by installing `wandb` and other necessary packages in your virtual environment on the SCC with 
+Now we can start installing `wandb` and other necessary packages in your virtual environment on the SCC with 
 
 ```
 pip install -r requirements.txt
@@ -35,9 +48,15 @@ wandb sweep --project <project_name> --entity <entity_name> sweep.yaml
 which will print out the `sweep_id` you need to run the hyperparameter search. It looks like this:
 ![wandb sweep](assets/wandb_sweep.png)
 
-You'll then take the given command, `wandb agent cisl-bu/sweep_example/lkjlh4uf`, and copy it into the last line of `sweep.qsub` but add the option `--count 1`, to make sure that that batch job runs only one run to ensure that all jobs can complete within the time limit defined by `h_rt`.
+You'll then take the given command, `wandb agent cisl-bu/sweep_example/lkjlh4uf` in this example, and copy it into the last line of `sweep.qsub` but add the option `--count 1`, to make sure that that batch job runs only one run to ensure that all jobs can complete within the time limit defined by `h_rt`.
 
-`sweep.sh` is a wrapper for the qsub batch script that you will ultimately run in the login node by entering in the terminal:
+The wandb sweep controller runs until you stop it which you can do on the wandb.ai sweeps project webpage, or in the terminal with the command
+```
+wandb sweep --cancel cisl-bu/sweep_example/lkjlh4uf
+```
+for example.
+
+I wrote a shell script `sweep.sh` which is a wrapper for the qsub batch script that you will ultimately run in the login node by entering in the terminal:
 ```
 ./sweep.sh
 ```
@@ -53,5 +72,13 @@ You can monitor the array batch job with qstat -u <scc username> and if you want
 watch -n 1 "qstat -u <scc username>"
 ```
 
-Happy ML training!
+If you decide to stop the runs, you may either cancel the sweep like above or with the batch system command 
+```
+qdel <JOBID>
+```
+
+
+`wandb.sweep` is very flexible, you may search over more parameters than typical ML hyperparameters. Get creative! But also be wary that the larger number of parameters to search over, will require more runs, which could take a while on the SCC while we have a limited number of GPUs.
+
+Otherwise, happy ML training!
 
