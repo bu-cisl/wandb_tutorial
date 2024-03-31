@@ -1,5 +1,5 @@
 # `wandb` in the cluster
-This is a tutorial/template for Boston University researchers who have SCC projects to integrate [`wandb`](https://wandb.ai/site) in their ML stack with the [Boston University Shared Computing Cluster (SCC)](https://www.bu.edu/tech/support/research/computing-resources/scc/), the batch system of which is based on the [Sun Grid Engine](https://gridscheduler.sourceforge.net/) (SGE) scheduler. While you can use wandb on a personal workstation, wandb's benefits really shine through in a cloud computing setting. Therefore, this is more a tutorial/example for wandb + SCC integration, rather than a tutorial on `wandb` -- you can find the latter in abundance online.
+This is a tutorial/template for Boston University researchers who have SCC projects to integrate [`wandb`](https://wandb.ai/site) in their ML stack with the [Boston University Shared Computing Cluster (SCC)](https://www.bu.edu/tech/support/research/computing-resources/scc/), the batch system of which is based on the [Sun Grid Engine](https://gridscheduler.sourceforge.net/) (SGE) scheduler. While you can use wandb on a personal workstation, wandb's benefits really shine through in a cloud computing setting, particularly `wandb sweep` + SGE array jobs for convenient and distributed experimentation and tracking. Therefore, this is more a tutorial/example for wandb + SCC integration, rather than a tutorial on `wandb` -- you can find the latter in abundance online.
 
 ## Installing `wandb` and others
 Begin by cloning this repository in your SCC project folder. Having SSH'ed already into the SCC login node, navigate to the folder in which you want to install this repository, and do
@@ -61,7 +61,7 @@ wandb sweep --project <project_name> --entity <entity_name> sweep.yaml
 which will print out the `sweep_id` you need to run the hyperparameter search. It looks like this:
 ![wandb sweep](assets/wandb_sweep.png)
 
-You'll then take the given command, `wandb agent cisl-bu/sweep_example/lkjlh4uf` in this example, and copy it into the last line of `sweep.qsub` but add the option `--count 1`, to make sure that that batch job runs only one run to ensure that all jobs can complete within the time limit defined by `h_rt`.
+You'll then take the given command for deploying a Sweep Agent, `wandb agent cisl-bu/sweep_example/lkjlh4uf` in this example, and copy it into the last line of `sweep.qsub` but add the option `--count 1`, to make sure that that batch job runs only one run to ensure that all jobs can complete within the time limit defined by `h_rt`. This qsub script is written to request multiple compute nodes on which to start and deploy a Sweep Agent using the `-t` flag for array jobs.
 
 The `qsub` script looks like this
 ```
