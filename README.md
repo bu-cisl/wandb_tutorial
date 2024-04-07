@@ -40,6 +40,7 @@ You should be good to run this command just once during installation. Any other 
 ```
 export WANDB_DATA_DIR=/scratch
 ```
+[source](https://community.wandb.ai/t/wandb-artifact-cache-directory-fills-up-the-home-directory/5224)
 
 ## Basic `wandb`
 I provided a basic sample of how to use the basic features of `wandb`, which are `wandb.log()` and `wandb.watch()` in `basic_train.py`. This allows you to monitor training, and even visualize the tensors themselves as the evolve throughout training! It is all there in `basic_train.py`.
