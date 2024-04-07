@@ -40,6 +40,8 @@ You should be good to run this command just once during installation. Any other 
 ```
 export WANDB_DATA_DIR=/scratch
 ```
+The [`/scratch` folder on the SCC](https://www.bu.edu/tech/support/research/system-usage/running-jobs/resources-jobs/#scratch) is for temporary storage on the compute node that isn't backed up and contents are deleted after 31 days. It's primarily useful for fast intra-job IO since it's local, but we can use it to put wandb cached stuff that can grow quite quickly.
+
 [source](https://community.wandb.ai/t/wandb-artifact-cache-directory-fills-up-the-home-directory/5224)
 
 ## Basic `wandb`
