@@ -35,6 +35,12 @@ which will prompt you for your API key. If you don't have an API key, you may lo
 
 You should be good to run this command just once during installation. Any other time you log on the SCC, you wouldn't need to log into `wandb` again because it created a `.netrc` file with your `wandb` login credentials in your home directory.
 
+### artifact cache
+`wandb` will cache Artifacts in your `~/.local/share/wandb` folder, which can make your SCC home quota exceed its 10GB limit quite quickly. To amend this, open up your `.bashrc` or your `.zshrc` file in your home directory (depends on which shell you use) and add the following line to the text file:
+```
+export WANDB_DATA_DIR=/scratch
+```
+
 ## Basic `wandb`
 I provided a basic sample of how to use the basic features of `wandb`, which are `wandb.log()` and `wandb.watch()` in `basic_train.py`. This allows you to monitor training, and even visualize the tensors themselves as the evolve throughout training! It is all there in `basic_train.py`.
 
