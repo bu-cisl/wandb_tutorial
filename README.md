@@ -84,7 +84,7 @@ The `qsub` script looks like this
 #$ -t 1-20
 
 module load python3/3.10.12
-source activate .venv/bin/activate
+source .venv/bin/activate
 wandb agent --count 1 cisl-bu/sweep_tutorial/lkjlh4uf
 ```
 We first define our SCC project, the job time limit, `N` SCC compute nodes to use (how many agents to run) from `1-N`. Then we just load the python module, activate the virtual environment and call the agent for that sweep_id! 
